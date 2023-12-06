@@ -17,7 +17,7 @@ data:
  -iamges
  -subtitle
  - tags
- -related 
+ 
  description
 
 
