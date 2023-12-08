@@ -31,6 +31,9 @@ class Product(models.Model):
         self.slug=slugify(self.name)
         super(Product,self).save(*args,**kwaegs)
 
+    def __str__ (self):
+        return self.name   
+
 
 
 
@@ -42,13 +45,16 @@ class ProductImage(models.Model):
 
 class Brand(models.Model):
     name=models.CharField(_('name'),max_length=100)
-    iamge= models.ImageField(_('iamge'),upliad_to='brand')
+    iamge= models.ImageField(_('iamge'),upload_to='brand')
     slug = models.SlugField(blank=True, null= True)
 
 
     def save(self,*args,**kwaegs):
         self.slug=slugify(self.name)
         super(Brand,self).save(*args,**kwaegs)
+
+    def __str__ (self):
+        return self.name   
 
 
 
@@ -59,4 +65,8 @@ class Review(models.Model):
     product= models.ForeignKey(Product,verbose_name=_('product'), related_name='review_product', on_delete=models.CASCADE)
     review= models.TextField(_('review'),max_length=500)
     rate=models.IntegerField(_('rate'),choices=[(i,i)for i in range(1,6)])
-    created_at= models.DateTimeField(defulat=timezone.now)
+    created_at= models.DateTimeField(default=timezone.now)
+
+
+    def __str__ (self):
+        return f"{self.user} - {self.product} -{self.rate}"  
